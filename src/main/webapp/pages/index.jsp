@@ -6,6 +6,7 @@
     ArrayList<File> dirs = (ArrayList<File>)request.getAttribute("dirs");
     ArrayList<File> files = (ArrayList<File>)request.getAttribute("files");
     String parentPath = (String)request.getAttribute("parentsPath");
+    String login = (String)request.getAttribute("login");
 %>
 
 <!DOCTYPE html>
@@ -23,7 +24,8 @@
                     out.println("</a>");
                 }
                 else {
-                    out.println("<span> Root directories </span>");
+                    out.println("<div> Root directories </div>");
+                    out.println("<div>" + "Login: " + login + "</div>");
                 }
             out.println("</div><hr/>");
             %>
