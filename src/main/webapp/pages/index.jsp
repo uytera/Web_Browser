@@ -26,8 +26,11 @@
                 else {
                     out.println("<div> Root directories </div>");
                     out.println("<div>" + "Login: " + login + "</div>");
+                    out.println("<a href='/back/account/out/'>");
+                    out.println("<span> Выход  </span>");
+                    out.println("</a>");
                 }
-            out.println("</div><hr/>");
+                out.println("</div><hr/>");
             %>
         <div class='files'>
             <div class='dir'>

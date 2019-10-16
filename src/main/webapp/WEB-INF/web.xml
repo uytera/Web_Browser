@@ -11,6 +11,10 @@
     <servlet-class>com.filem.servlet.FileServlet</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>logOutServlet</servlet-name>
+    <servlet-class>com.filem.servlet.LogOutServlet</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>RegServlet</servlet-name>
     <servlet-class>com.filem.servlet.RegistrationServlet</servlet-class>
   </servlet>
@@ -31,6 +35,11 @@
   <servlet-mapping>
     <servlet-name>fileServlet</servlet-name>
     <url-pattern>/FileBrowser/</url-pattern>
+  </servlet-mapping>logOutServlet
+
+  <servlet-mapping>
+    <servlet-name>logOutServlet</servlet-name>
+    <url-pattern>/back/account/out/</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>

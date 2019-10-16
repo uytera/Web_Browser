@@ -5,7 +5,7 @@
         <title></title>
     </head>
     <body>
-        <div>Use path attribute in address bar. For example: "http://localhost:8088/?path=C:/".
+        <div>Irritum file viam.
         </div>
     </body>
 </html>

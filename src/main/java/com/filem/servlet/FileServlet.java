@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+
 @WebServlet("/FileBrowser")
 public class FileServlet extends HttpServlet {
 
@@ -17,23 +17,28 @@ public class FileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String sessionId = req.getSession().getId();
+        String login;
 
         if(!accountService.CheckSessionId(sessionId)){
             resp.getWriter().println("Advena. Commodo signum in");
             return;
         }
-        String path = req.getParameter("path");
-        if (req.getParameter("path") == null) {
-            getServletContext().getRequestDispatcher("/pages/error.jsp").forward(req, resp);
-            return;
+        else{
+            login = accountService.getLoginBySessionId(sessionId);
         }
-        path = new String(path.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
+        String defaultPath = "C:\\Users" + "\\" + login;
+        if (req.getParameter("path") != null) {
+            defaultPath = req.getParameter("path");
+        }
         FilesList filesList = new FilesList();
-        if (filesList.setLists(path)) {
+
+        if (filesList.setLists(defaultPath)) {
             req.setAttribute("login", accountService.getLoginBySessionId(sessionId));
             req.setAttribute("dirs", filesList.getDirs());
             req.setAttribute("files", filesList.getFiles());
-            req.setAttribute("parentsPath", filesList.getPath());
+            if(defaultPath.compareTo("C:\\Users" + "\\" + login) != 0) {
+                req.setAttribute("parentsPath", filesList.getPath());
+            }
             getServletContext().getRequestDispatcher("/pages/index.jsp").forward(req, resp);
         }
         else{

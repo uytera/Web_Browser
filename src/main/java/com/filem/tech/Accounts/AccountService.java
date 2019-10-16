@@ -1,9 +1,7 @@
 package com.filem.tech.Accounts;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 public class AccountService {
     private static Map<String, UserProfile> userBase = new HashMap<>();
