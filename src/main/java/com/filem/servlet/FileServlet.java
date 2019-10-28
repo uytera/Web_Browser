@@ -26,7 +26,9 @@ public class FileServlet extends HttpServlet {
         else{
             login = accountService.getLoginBySessionId(sessionId);
         }
+
         String defaultPath = "C:\\Users" + "\\" + login;
+
         if (req.getParameter("path") != null) {
             defaultPath = req.getParameter("path");
         }

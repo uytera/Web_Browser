@@ -1,9 +1,8 @@
 package com.filem.servlet;
 
 import com.filem.tech.Accounts.AccountService;
-import com.filem.tech.Accounts.UserProfile;
+import com.database.dataSet.UserProfile;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

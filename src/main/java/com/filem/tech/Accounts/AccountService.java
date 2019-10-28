@@ -1,33 +1,41 @@
 package com.filem.tech.Accounts;
 
+import com.database.dataSet.UserProfile;
+import com.database.DBService;
+
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class AccountService {
-    private static Map<String, UserProfile> userBase = new HashMap<>();
+    //private static Map<String, UserProfile> userBase = new HashMap<>();
     private static Map<String, UserProfile> sessionBase = new HashMap<>();
+    private DBService base = new DBService();
 
     public AccountService(){
     }
 
     public boolean AddNewUser(String login, String password, String email) {
         UserProfile user = new UserProfile(login, password, email);
-        if (userBase.containsKey(login)){
+        if (base.getUser(login) != null){
             return false;
         }
-        userBase.put(user.getLogin(), user);
+        try {
+            base.addUser(user.getLogin(), user.getPasssword(), user.getEmail());
+        }
+        catch(SQLException e) {return false;}
         return true;
     }
 
     public boolean FindUser(String login){
-        if(userBase.containsKey(login)){
+        if(base.getUser(login) == null){
             return true;
         }
         return false;
     }
 
     public boolean AuthorizateUser(UserProfile authProfile, String sessionID){
-        UserProfile baseProfile = userBase.get(authProfile.getLogin());
+        UserProfile baseProfile = base.getUser(authProfile.getLogin());
         if(baseProfile != null){
             if(baseProfile.getPasssword().compareTo(authProfile.getPasssword()) == 0){
                 sessionBase.put(sessionID, baseProfile);

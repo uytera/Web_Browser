@@ -35,7 +35,7 @@ public class RegistrationServlet  extends HttpServlet {
             resp.sendRedirect("/login/");
         }
         else {
-            resp.getWriter().println("Talis login iam existit");
+            resp.getWriter().println("Talis login iam existit vel nos have a forsit");
             return;
         }
     }

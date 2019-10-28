@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Web_Browser" target="1.7" />
+      <module name="Web_Browser" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>
