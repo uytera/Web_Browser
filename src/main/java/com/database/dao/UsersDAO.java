@@ -2,11 +2,36 @@ package com.database.dao;
 
 import com.database.dataSet.UserProfile;
 import com.database.executor.Executor;
+import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
 public class UsersDAO {
+
+    private Session session;
+
+    public UsersDAO(Session session) {
+        this.session = session;
+    }
+
+    public UserProfile get(String login) throws HibernateException {
+        return (UserProfile) session.get(UserProfile.class, login);
+    }
+
+    public String getUserLogin(String name) throws HibernateException {
+        Criteria criteria = session.createCriteria(UserProfile.class);
+        return ((UserProfile) criteria.add(Restrictions.eq("name", name)).uniqueResult()).getLogin();
+    }
+
+    public String insertUser(String login, String passsword, String email) throws HibernateException {
+        return (String) session.save(new UserProfile(login, passsword, email));
+    }
+}
+    /*
     private Executor executor;
 
     public UsersDAO(Connection connection) {
@@ -25,13 +50,6 @@ public class UsersDAO {
         }
     }
 
-    /*public long getUserPassword(String login) throws SQLException {
-        return executor.execQuery("select * from users where user_name='" + name + "'", result -> {
-            result.next();
-            return result.getLong(1);
-        });
-    }*/
-
     public void insertUser(String login, String passsword, String email) throws SQLException {
         executor.execUpdate("insert into users (login, passsword, email) values ('" + login + "','"+ passsword + "','"+ email + "')");
     }
@@ -45,3 +63,4 @@ public class UsersDAO {
     }
 
 }
+*/

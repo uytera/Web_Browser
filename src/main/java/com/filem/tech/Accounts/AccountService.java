@@ -2,7 +2,9 @@ package com.filem.tech.Accounts;
 
 import com.database.dataSet.UserProfile;
 import com.database.DBService;
+import org.hibernate.HibernateException;
 
+import java.awt.event.HierarchyBoundsAdapter;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +25,7 @@ public class AccountService {
         try {
             base.addUser(user.getLogin(), user.getPasssword(), user.getEmail());
         }
-        catch(SQLException e) {return false;}
+        catch(HibernateException e) {return false;}
         return true;
     }
 
